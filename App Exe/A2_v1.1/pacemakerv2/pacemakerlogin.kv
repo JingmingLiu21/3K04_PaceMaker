@@ -1,0 +1,617 @@
+#:kivy 1.11.1
+
+<WelcomeWindow>:
+    name: "welcomeWin"
+
+    
+    FloatLayout:
+        size: root.width-400, root.height-200
+        Label: 
+            text: "Welcome to the Pacemaker GUI"
+            font_size: 25*root.width/600
+            pos_hint: {"center_x":0.5, "y":0.2}
+        
+        ## Login
+        Button:
+            text:"Login"
+            size_hint: 0.3,0.1
+            pos_hint: {"center_x":0.5, "top":0.45}  ##The keys ‘x’, ‘right’ and ‘center_x’ will use the parent width. The keys ‘y’, ‘top’ and ‘center_y’ will use the parent height.
+            
+            on_release: 
+                # app.root.current = "second" if passw.text == "pace" else "main"
+                # app.root.current = "loginWin"
+                # root.manager.transition.direction = "up"
+                root.goToLogin()
+                
+
+        ## Register
+        Button:
+            text:"Register"
+            size_hint: 0.3,0.1
+            pos_hint: {"center_x":0.5, "top":0.3}
+
+            on_release:
+                root.goToReg()
+
+
+<LoginWindow>:
+    name: "loginWin"
+
+    nameField: nameField
+    passwField: password
+
+
+    FloatLayout:
+        size_hint: 0.4,0.7
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+
+
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 30
+            # padding: 0, 100 #padding_horizontal, padding_vertical
+            pos_hint: {"center_x":0.5,"center_y":0.5}
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: 0.6
+                Label:
+                    text: "Returning User\nPlease Enter Your Details"
+                    halign: 'center'
+                    valign: 'top'
+                    font_size: 27*root.width/800
+                    size_hint: 1,0.1
+                    # pos_hint: {"center_x":0.5, "center_y":0.8}
+
+                Label:
+                    text: "Username: "
+                    font_size: 15
+                    size_hint_x: None
+                    size_hint_y: 0.08
+                    pos_hint: {'left': 1}
+                
+                TextInput:
+                    id:nameField
+                    multiline:False
+                    size_hint: 1,0.06
+                    # pos_hint: {"center_x":0.5, "center_y":0.55}
+
+                Label:
+                    text: "Password: "
+                    font_size: 15
+                    size_hint_x: None
+                    size_hint_y: 0.08
+                    pos_hint: {'left': 1}
+
+                TextInput:
+                    id: password
+                    multiline:False
+                    size_hint: 1,0.06
+                    # pos_hint: {"center_x":0.5, "center_y":0.35}
+
+            BoxLayout:
+                orientation: "vertical"
+                spacing: 10
+                size_hint_y: 0.25
+
+                Button:
+                    text:"Login"
+                    size_hint: 1,0.1
+                    # pos_hint: {"center_x":0.5, "center_y":0.2}
+                    on_press: root.btnLogin()
+
+                Button:
+                    text:"Back"
+                    size_hint: 1,0.1
+                    # pos_hint: {"center_x":0.5, "center_y":0.1}
+                    on_press: root.btnBack()
+
+
+<RegisterWindow>:
+    name: "registerWin"
+
+    firstName_Field: firstName
+    lastName_Field: lastName
+    username_Field: username
+    password_Field: password
+
+    FloatLayout:
+        size_hint: 0.4,0.7
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+
+
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 30
+            pos_hint: {"center_x":0.5,"center_y":0.5}
+
+            Label:
+                text: "Create Your Account"
+                halign: 'center'
+                valign: 'top'
+                font_size: 27*root.width/800
+                size_hint: 1,0.1
+
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: 0.6
+                spacing: 10
+                
+
+                ## First + Last Name
+
+                GridLayout:
+                    cols: 2
+                    rows: 2
+                    spacing: [10,0]
+                    size_hint_x: 1
+                    size_hint_y: None
+                    height: 60
+
+                    Label:
+                        text: "First Name: "
+                        font_size: 15
+                        #size_hint_x: None
+                        height: 30
+                        pos_hint: {'left': 1}
+                        size_hint_x: None
+                    
+                    Label:
+                        text: "Last Name: "
+                        font_size: 15
+                        height: 30
+                        pos_hint: {'left': 1}
+                        size_hint_x: None
+
+                    TextInput:
+                        id:firstName
+                        multiline:False
+                        size_hint: 0.5, None
+                        height: 30
+
+                    TextInput:
+                        id:lastName
+                        multiline:False
+                        size_hint: 0.5, None
+                        height: 30
+                
+
+                ## Username
+
+                GridLayout:
+                    cols: 1
+                    rows: 2
+                    size_hint_x: 1
+                    size_hint_y: None
+                    height: 60
+
+                    Label:
+                        text: "Username: "
+                        font_size: 15
+                        height: 30
+                        pos_hint: {'left': 1}
+                        size_hint_x: None
+                    
+                    TextInput:
+                        id:username
+                        multiline:False
+                        size_hint: 1,None
+                        height: 30
+                
+
+
+                ## Password
+
+                GridLayout:
+                    cols: 1
+                    rows: 2
+                    size_hint_x: 1
+                    size_hint_y: None
+                    height: 60
+
+                    Label:
+                        text: "Password: "
+                        font_size: 15
+                        height: 30
+                        pos_hint: {'left': 1}
+                        size_hint_x: None
+
+                    TextInput:
+                        id: password
+                        multiline:False
+                        size_hint: 1,None
+                        height: 30
+
+            BoxLayout:
+                orientation: "vertical"
+                spacing: 10
+                size_hint_y: 0.25
+
+                Button:
+                    text:"Register"
+                    size_hint: 1,0.1
+                    on_press: root.regUser()
+
+                Button:
+                    text:"Back"
+                    size_hint: 1,0.1
+                    on_press: root.btnBack()
+
+
+
+<MainWindow>:
+    name: "mainWin"
+    
+    currentUser: currentUser
+    display_active_pacingMode:pacingMode_text
+
+    display_LRL_parameter:LRL_parameterText
+    display_URL_parameter:URL_parameterText
+    display_AtrAmp_parameter:AtrAmp_parameterText
+    display_VentAmp_parameter:VentAmp_parameterText
+    display_AtrPulseWidth_parameter:AtrPulseWidth_parameterText
+    display_VentPulseWidth_parameter:VentPulseWidth_parameterText
+    display_ARP_parameter:ARP_parameterText
+    display_VRP_parameter:VRP_parameterText
+
+    #display_heartbeat_bpm:heartBPM_text  ####  for later
+
+
+    FloatLayout:
+        ## Current user displayed
+        GridLayout:
+            cols: 3
+            size_hint: 0.5,0.05
+            y: root.height-self.height-2
+            pos_hint: {"center_x": 0.5}
+
+            Label:
+                text:""
+
+            Label:
+                id:currentUser
+                text: ""
+                font_size: 18
+                width: 10
+
+            Label:
+                text: "\u2022"
+                color: root.indicatorColour
+                font_size: 35
+                
+
+        ## Logout Button top right
+        Button:
+            text: "Logout"
+            size_hint: 0.1,0.05
+            pos: root.width-self.width-2,root.height-self.height-2
+            on_press: root.serialConnectMain() #root.logout()
+
+        ## Delete Account Button top left
+        Button:
+            text: "Delete Account"
+            size_hint: 0.15,0.05
+            pos: 2,root.height-self.height-2
+            on_press: root.deleteAccount()
+
+        ## Main App functions here:   ----------------------------------------------------
+
+        # Pacing mode details
+        GridLayout:
+            cols: 2
+            size_hint: 1,0.1
+            pos_hint: {"center_x":0.5,"top":0.85}
+            padding: 70,0
+            spacing: 30
+            Label:
+                id:pacingMode_text
+                text: ""
+                font_size: 18
+
+            ## Mode Selector Button
+            Button:
+                text: "Choose Pacing Mode"
+                pos_hint: {"center_x":0.5,"top":0.85}
+                on_press: root.open_modeSelector()
+
+        ## Programmable Parameters Button
+        Button:
+            text: "Change Programmable Parameters"
+            size_hint: 0.4,0.1
+            pos_hint: {"center_x":0.5, "top":0.6}
+            on_press: root.open_programmableParameters()
+        
+        ## Deploy Button 
+        Button:
+            text: "Deploy Parameters"
+            size_hint:0.4,0.1
+            pos_hint: {"center_x":0.5, "top":0.13}
+            on_press: root.deploy()
+
+
+        ## Display all programmable parameters -------------------------------
+        
+        GridLayout:
+            cols: 2
+            size_hint: 0.85,0.3
+            pos_hint: {"center_x":0.5,"top":0.45}
+            spacing: 20,0
+        
+            Label:
+                id:LRL_parameterText
+                text: ""
+                font_size: 18
+                halign: 'left'
+                pos_hint: {'x': 0}
+                size_hint_x: 0.5
+                background_color: 0, 1, 1, 1
+
+            Label:
+                id:URL_parameterText
+                text: ""
+                font_size: 18
+                halign: 'left'
+                pos_hint: {'x': 0}
+                size_hint_x: 0.5
+                background_color: 1, 1, 1, 1
+
+            Label:
+                id:AtrAmp_parameterText
+                text: ""
+                font_size: 18
+                halign: 'left'
+                pos_hint: {'x': 0}
+                size_hint_x: 0.5
+
+            Label:
+                id:VentAmp_parameterText
+                text: ""
+                font_size: 18
+                halign: 'left'
+                pos_hint: {'x': 0}
+                size_hint_x: 0.5
+
+            Label:
+                id:AtrPulseWidth_parameterText
+                text: ""
+                font_size: 18
+                halign: 'left'
+                pos_hint: {'x': 0}
+                size_hint_x: 0.5
+
+            Label:
+                id:VentPulseWidth_parameterText
+                text: ""
+                font_size: 18
+                halign: 'left'
+                pos_hint: {'x': 0}
+                size_hint_x: 0.5
+
+
+            Label:
+                id:ARP_parameterText
+                text: ""
+                font_size: 18
+                halign: 'left'
+                pos_hint: {'x': 0}
+                size_hint_x: 0.5
+
+
+            Label:
+                id:VRP_parameterText
+                text: ""
+                font_size: 18
+                halign: 'left'
+                pos_hint: {'x': 0}
+                size_hint_x: 0.5
+
+
+        ## BPM Display for later
+        # GridLayout:
+        #     pos_hint: {"center_x":0.5, "top":0.3}
+        #     Label:
+        #         id:heartBPM_text
+        #         text: ""
+        #         font_size: 18
+        #         halign: 'center'
+
+                
+
+<modeSelectorPopup>:
+    FloatLayout:
+        pos_hint: {"center_x":0.5, "center_y":0.5}
+        
+        GridLayout:
+            rows:2
+            pos_hint: {"center_x":0.5, "center_y":0.5}
+            size_hint: 0.5, 0.9
+            spacing: 30
+
+            GridLayout:
+                size_hint_y: 0.8
+                rows: 5 # number of modes
+                spacing: 10
+                
+                Button:
+                    text:"AOO"
+                    ## create var to track selected mode
+                    on_press: 
+                        root.setPacingMode("AOO")
+                        root.closePopup()
+
+                Button:
+                    text:"VOO"
+                    on_press: 
+                        root.setPacingMode("VOO")
+                        root.closePopup()
+
+                Button:
+                    text:"AAI"
+                    on_press: 
+                        root.setPacingMode("AAI")
+                        root.closePopup()
+
+                Button:
+                    text:"VVI"
+                    on_press: 
+                        root.setPacingMode("VVI")
+                        root.closePopup()
+
+                # Button:
+                #     text:"Etc."
+
+
+            GridLayout:
+                rows:1
+                size_hint_y: 0.2
+
+                Button:
+                    text:"Cancel"
+                    on_release: root.closePopup()
+
+<programmableParametersPopup>:
+    FloatLayout:
+        pos_hint: {"center_x":0.5, "center_y":0.5}
+        #size_hint: 0.7,0.9
+        
+        GridLayout:
+            rows:2
+            pos_hint: {"center_x":0.5, "center_y":0.5}
+            size_hint: 0.5, 1
+            spacing: 30
+            padding: 20
+
+            GridLayout:
+                size_hint_y: 0.9
+                rows: 8 # number of programmable parameters
+                spacing: 8
+                
+                Button:
+                    text:"Lower Rate Limit"
+                    on_press: 
+                        root.setIndex(1) #index to keep track of which button was pressed
+                        root.open_textInput("Please enter desired LRL value")
+
+                Button:
+                    text:"Upper Rate Limit"
+                    on_press: 
+                        root.setIndex(2) #index to keep track of which button was pressed
+                        root.open_textInput("Please enter desired URL value")
+
+                Button:
+                    text:"Atrial Amplitude"
+                    on_press: 
+                        root.setIndex(3) #index to keep track of which button was pressed
+                        root.open_textInput("Please enter desired Atrial Amplitude")
+
+                Button:
+                    text:"Ventrical Amplitude"
+                    on_press: 
+                        root.setIndex(6) #index to keep track of which button was pressed
+                        root.open_textInput("Please enter desired Ventrical Amplitude")
+
+                Button:
+                    text:"Atrial Pulse Width"
+                    on_press: 
+                        root.setIndex(4) #index to keep track of which button was pressed
+                        root.open_textInput("Please enter desired Atrial Pulse Width")
+
+                Button:
+                    text:"Ventrical Pulse Width"
+                    on_press: 
+                        root.setIndex(7) #index to keep track of which button was pressed
+                        root.open_textInput("Please enter desired Ventrical Pulse Width")
+
+                Button:
+                    text:"Atrium Refractory Period"
+                    on_press: 
+                        root.setIndex(5) #index to keep track of which button was pressed
+                        root.open_textInput("Please enter desired ARP value")
+
+                Button:
+                    text:"Ventricle Refractory Period"
+                    on_press: 
+                        root.setIndex(8) #index to keep track of which button was pressed
+                        root.open_textInput("Please enter desired VRP value")
+                
+
+
+            GridLayout:
+                rows:1
+                size_hint_y: 0.2
+
+                Button:
+                    text:"Done"
+                    on_press: root.closePopup()
+
+<textInputPopup>:
+
+    inputField: textIn
+
+    FloatLayout:
+        pos_hint: {"center_x":0.5, "center_y":0.5}
+
+        GridLayout:
+            size_hint: 0.6, 0.9
+            pos_hint: {"center_x":0.5, "center_y":0.5}
+            rows: 3 
+            spacing: 10
+            height: 20
+            padding: 0,35
+
+            # Text input
+            TextInput:
+                id:textIn
+                multiline:False
+
+            # Input values from text field
+            Button:
+                text:"Set Value"
+                on_release: 
+                    root.selectProgParam()
+                    root.closePopup()
+            
+            # Cancel
+            Button:
+                text:"Cancel"
+                on_release:
+                    root.closePopup()
+
+<errorPopup>:
+    size:400,300
+    Label:
+        text: "Invalid Entry"  ##"Invalid username or password"
+        size_hint:0.6,0.2
+        pos_hint: {"x":0.2, "center_y":0.7}
+
+    Button:
+        text:"Ok"
+        size_hint:0.6,0.3
+        pos_hint: {"x":0.2, "top":0.4}
+        on_press: root.closePopup()
+
+<errorMaxPopup>:
+    size:400,300
+    Label:
+        text: "Saved Account Limit Reached. \nA maximum of 10 accounts can be stored locally."
+        # size_hint:0.6,0.2
+        text_size: root.width-25, None
+        multiline:True
+        halign: 'center'
+        pos_hint: {"center_x":0.5, "center_y":0.7}
+
+    Button:
+        text:"Ok"
+        size_hint:0.6,0.3
+        pos_hint: {"center_x":0.5, "top":0.4}
+        on_release: root.closePopup()
+
+
+<successPopup>:
+    size:400,300
+    Label:
+        text: "Success!"
+        halign: 'center'
+        size_hint:0.6,0.2
+        pos_hint: {"center_x":0.5, "center_y":0.5}
